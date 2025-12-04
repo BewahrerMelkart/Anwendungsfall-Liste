@@ -24,8 +24,16 @@ public class MainController {
      */
     public String[] showShelfContent(int index){
         List<File> list = allShelves[index];
+        String[] content;
+        content  = new String [64];
+        int i=0;
         //TODO 03: Ausgabe der Inhalte
-        return new String[]{"Platzhalter00", "Platzhalter01", "Platzhalter02"};
+        list.toFirst();
+        while(list.hasAccess()){
+            i = i+1;
+            content[i] = list.getContent().getName();
+        }
+        return content;
     }
 
     /**
@@ -57,8 +65,11 @@ public class MainController {
      * @return true, falls das Hinzufügen geklappt hat, sonst false.
      */
     public boolean appendANewFile(int index, String name, String phoneNumber){
+        File newFile = new File(name, phoneNumber);
+        allShelves[index].append(newFile);
+        return true;
+
         //TODO 02: Hinzufügen einer neuen Akte am Ende der Liste.
-        return false;
     }
 
     /**
