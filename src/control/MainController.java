@@ -12,7 +12,7 @@ public class MainController {
 
     public MainController(){
         allShelves = new List[2];
-        allShelves[0] = new List<File>(); //Beachtet die unterschiedliche Instanziierung! Was bedeutet das?
+        allShelves[0] = new List</*File*/>(); //Beachtet die unterschiedliche Instanziierung! Was bedeutet das?
         allShelves[1] = new List<>();
         createFiles();
     }
@@ -24,8 +24,29 @@ public class MainController {
      */
     public String[] showShelfContent(int index){
         List<File> list = allShelves[index];
+
+        int length = 0;
+        list.toFirst();
+
+        while(list.hasAccess()){
+            list.next();
+            length++;
+        }
+
+        String[] content= new String [length];
+
+        int i=0;
+        list.toFirst();
+
+        while(list.hasAccess()){
+            content[i] = list.getContent().getName();
+            list.next();
+            i = i+1;
+        }
+
+        return content;
+
         //TODO 03: Ausgabe der Inhalte
-        return new String[]{"Platzhalter00", "Platzhalter01", "Platzhalter02"};
     }
 
     /**
@@ -45,6 +66,15 @@ public class MainController {
      * @return true, falls alles funktionierte, sonst false.
      */
     public boolean appendFromTo(int from, int to){
+        allShelves[to].concat(allShelves[from]);
+
+        while(allShelves[from].hasAccess()){
+            allShelves[from].remove();
+            allShelves[from].next();
+        }
+
+        allShelves[from].toFirst();
+
         //TODO 04: Die Objekte einer Liste an eine andere anhängen und dabei die erste Liste leeren.
         return false;
     }
@@ -57,8 +87,14 @@ public class MainController {
      * @return true, falls das Hinzufügen geklappt hat, sonst false.
      */
     public boolean appendANewFile(int index, String name, String phoneNumber){
-        //TODO 02: Hinzufügen einer neuen Akte am Ende der Liste.
+        if (name !=null && phoneNumber != null) {
+            File newFile = new File(name, phoneNumber);
+            allShelves[index].append(newFile);
+            return true;
+        }
         return false;
+
+        //TODO 02: Hinzufügen einer neuen Akte am Ende der Liste.
     }
 
     /**
