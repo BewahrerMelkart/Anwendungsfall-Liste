@@ -12,7 +12,7 @@ public class MainController {
 
     public MainController(){
         allShelves = new List[2];
-        allShelves[0] = new List</*File*/>(); //Beachtet die unterschiedliche Instanziierung! Was bedeutet das?
+        allShelves[0] = new List<File>(); //Beachtet die unterschiedliche Instanziierung! Was bedeutet das?
         allShelves[1] = new List<>();
         createFiles();
     }
