@@ -119,8 +119,21 @@ public class MainController {
      * @return Zahlen-Array der Länge 2. Bei Index 0 wird das Regal, bei Index 1 die Position der Akte angegeben. Sollte das Element - also die Akte zum Namen - nicht gefunden werden, wird {-1,-1} zurückgegeben.
      */
     public int[] search(String name){
+        for (int j=0; j<allShelves.length;j++ ) {
+
+            allShelves[j].toFirst();
+            int i = 0;
+
+            while (allShelves[j].hasAccess()) {
+                if (allShelves[j].getContent().getName().equals(name)) {
+                    return new int[]{j, i};
+                }
+                i++;
+                allShelves[j].next();
+            }
+        }
         //TODO 05: Suchen in einer Liste.
-        return new int[]{-1,-1};
+        return new int[]{-1 , 0};
     }
 
     /**
