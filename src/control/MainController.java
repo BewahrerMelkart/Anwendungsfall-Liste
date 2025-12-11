@@ -66,14 +66,18 @@ public class MainController {
      * @return true, falls alles funktionierte, sonst false.
      */
     public boolean appendFromTo(int from, int to){
-        allShelves[to].concat(allShelves[from]);
+        if (allShelves[to] != null && allShelves[from] != null){
+            allShelves[to].concat(allShelves[from]);
 
-        while(allShelves[from].hasAccess()){
-            allShelves[from].remove();
-            allShelves[from].next();
+            while(allShelves[from].hasAccess()){
+                allShelves[from].remove();
+                allShelves[from].next();
+            }
+
+            allShelves[from].toFirst();
+            return true;
         }
 
-        allShelves[from].toFirst();
 
         //TODO 04: Die Objekte einer Liste an eine andere anhängen und dabei die erste Liste leeren.
         return false;
