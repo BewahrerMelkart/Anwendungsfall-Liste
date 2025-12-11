@@ -55,6 +55,12 @@ public class MainController {
      * @return true, falls die Sortierung geklappt hat, sonst false.
      */
     public boolean sort(int index){
+        List<File> shelv = allShelves[index];
+
+
+
+
+
         //TODO 07: Sortieren einer Liste.
         return false;
     }
@@ -144,7 +150,18 @@ public class MainController {
      */
     public String[] remove(int shelfIndex, int fileIndex){
         //TODO 06: Entfernen aus einer Liste.
-        return new String[]{"Nicht vorhanden","Nicht vorhanden"};
+        List<File> shelv = allShelves[shelfIndex];
+
+        shelv.toFirst();
+        for (int i = 0; i < fileIndex; i++){
+            shelv.next();
+            System.out.println(i);
+        }
+
+        File file = shelv.getContent();
+
+        shelv.remove();
+        return new String[]{file.getName(),file.getPhoneNumber()};
     }
 
     /**
