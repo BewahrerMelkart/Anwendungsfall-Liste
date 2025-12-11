@@ -56,13 +56,36 @@ public class MainController {
      */
     public boolean sort(int index){
         List<File> shelv = allShelves[index];
+        shelv.toFirst();
+        File previous = shelv.getContent();
 
+        while (!completed(shelv)) {
+            while (shelv.hasAccess()) {
+                if (previous.getName().compareTo(shelv.getContent().getName()) > 0) {
+                    //Rufe Switchmethode auf, die noch gemacht werden muss
+                    System.out.println("Getauscht");
+                }
 
-
-
-
+                previous = shelv.getContent();
+                shelv.next();
+            }
+        }
         //TODO 07: Sortieren einer Liste.
         return false;
+    }
+
+    public boolean completed (List<File> list){
+        list.toFirst();
+        File prev =  list.getContent();
+
+        while(list.hasAccess()){
+            if (prev.getName().compareTo(list.getContent().getName()) > 0){
+                return false;
+            }
+            prev =  list.getContent();
+            list.next();
+        }
+        return true;
     }
 
     /**
@@ -75,15 +98,9 @@ public class MainController {
         if (allShelves[to] != null && allShelves[from] != null){
             allShelves[to].concat(allShelves[from]);
 
-            while(allShelves[from].hasAccess()){
-                allShelves[from].remove();
-                allShelves[from].next();
-            }
-
             allShelves[from].toFirst();
             return true;
         }
-
 
         //TODO 04: Die Objekte einer Liste an eine andere anhängen und dabei die erste Liste leeren.
         return false;

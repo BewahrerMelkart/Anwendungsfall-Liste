@@ -269,7 +269,7 @@ public class List<ContentType> {
      */
     public void concat(List<ContentType> pList) {
         if (pList != this && pList != null && !pList.isEmpty()) { // Nichts tun,
-            // wenn pList und this identisch, pList leer oder nicht existent.
+            // wenn pList und this identisch, pList leer oder             // Liste pList loeschen.nicht existent.
 
             if (this.isEmpty()) { // Fall: An leere Liste anfuegen.
                 this.first = pList.first;
@@ -279,7 +279,6 @@ public class List<ContentType> {
                 this.last = pList.last;
             }
 
-            // Liste pList loeschen.
             pList.first = null;
             pList.last = null;
             pList.current = null;
